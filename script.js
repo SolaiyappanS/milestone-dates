@@ -1,12 +1,18 @@
 //Initial References
 let draggableObjects;
 let dropPoints;
-const startButton = document.getElementById("start");
 const result = document.getElementById("result");
 const controls = document.querySelector(".controls-container");
 const dragContainer = document.querySelector(".draggable-objects");
 const dropContainer = document.querySelector(".drop-points");
-const data = ["one", "two", "three", "four", "five", "six"];
+const data = [
+  { milestone: "milestone for date one", date: "one" },
+  { milestone: "milestone for date two", date: "two" },
+  { milestone: "milestone for date three", date: "three" },
+  { milestone: "milestone for date four", date: "four" },
+  { milestone: "milestone for date five", date: "five" },
+  { milestone: "milestone for date six", date: "six" },
+];
 
 let deviceType = "";
 let initialX = 0,
@@ -37,7 +43,6 @@ const randomValueGenerator = () => {
 //Win Game Display
 const stopGame = () => {
   controls.classList.remove("hide");
-  startButton.classList.remove("hide");
 };
 
 //Drag & Drop Functions
@@ -86,7 +91,7 @@ const drop = (e) => {
     const currentDrop = document.querySelector(`div[data-id='${e.target.id}']`);
     //Get boundaries of div
     const currentDropBound = currentDrop.getBoundingClientRect();
-    //if the position of flag falls inside the bounds of the countru name
+    //if the position of date falls inside the bounds of the countru name
     if (
       initialX >= currentDropBound.left &&
       initialX <= currentDropBound.right &&
@@ -133,7 +138,7 @@ const drop = (e) => {
   }
 };
 
-//Creates flags and countries
+//Creates dates and milestones
 const creator = () => {
   dragContainer.innerHTML = "";
   dropContainer.innerHTML = "";
@@ -149,21 +154,21 @@ const creator = () => {
     }
   }
   for (let i of randomData) {
-    const flagDiv = document.createElement("div");
-    flagDiv.classList.add("draggable-image");
-    flagDiv.setAttribute("draggable", true);
+    const dateDiv = document.createElement("div");
+    dateDiv.classList.add("draggable-image");
+    dateDiv.setAttribute("draggable", true);
     if (isTouchDevice()) {
-      flagDiv.style.position = "absolute";
+      dateDiv.style.position = "absolute";
     }
-    flagDiv.innerHTML = `<img src="./img/${i}.png" id="${i}">`;
-    dragContainer.appendChild(flagDiv);
+    dateDiv.innerHTML = `<img src="./img/${i.date}.png" id="${i.date}">`;
+    dragContainer.appendChild(dateDiv);
   }
   //Sort the array randomly before creating country divs
   randomData = randomData.sort(() => 0.5 - Math.random());
   for (let i of randomData) {
     const countryDiv = document.createElement("div");
-    countryDiv.innerHTML = `<div class='countries' data-id='${i}'>
-    ${i.charAt(0).toUpperCase() + i.slice(1).replace("-", " ")}
+    countryDiv.innerHTML = `<div class='milestones' data-id='${i.date}'>
+    ${i.milestone}
     </div>
     `;
     dropContainer.appendChild(countryDiv);
@@ -171,29 +176,25 @@ const creator = () => {
 };
 
 //Start Game
-startButton.addEventListener(
-  "click",
-  (startGame = async () => {
-    currentElement = "";
-    controls.classList.add("hide");
-    startButton.classList.add("hide");
-    //This will wait for creator to create the images and then move forward
-    await creator();
-    count = 0;
-    dropPoints = document.querySelectorAll(".countries");
-    draggableObjects = document.querySelectorAll(".draggable-image");
+const startGame = async () => {
+  currentElement = "";
+  controls.classList.add("hide");
+  //This will wait for creator to create the images and then move forward
+  await creator();
+  count = 0;
+  dropPoints = document.querySelectorAll(".milestones");
+  draggableObjects = document.querySelectorAll(".draggable-image");
 
-    //Events
-    draggableObjects.forEach((element) => {
-      element.addEventListener("dragstart", dragStart);
-      //for touch screen
-      element.addEventListener("touchstart", dragStart);
-      element.addEventListener("touchend", drop);
-      element.addEventListener("touchmove", touchMove);
-    });
-    dropPoints.forEach((element) => {
-      element.addEventListener("dragover", dragOver);
-      element.addEventListener("drop", drop);
-    });
-  })
-);
+  //Events
+  draggableObjects.forEach((element) => {
+    element.addEventListener("dragstart", dragStart);
+    //for touch screen
+    element.addEventListener("touchstart", dragStart);
+    element.addEventListener("touchend", drop);
+    element.addEventListener("touchmove", touchMove);
+  });
+  dropPoints.forEach((element) => {
+    element.addEventListener("dragover", dragOver);
+    element.addEventListener("drop", drop);
+  });
+};
