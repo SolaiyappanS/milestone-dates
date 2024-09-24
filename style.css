@@ -43,41 +43,101 @@ img {
 }
 .milestones {
   place-items: center;
-  border: 0.25em dashed #009fc7;
+  border: 0.15em dashed #009fc7;
   border-radius: 0.8em;
   margin: 10px;
-  padding: 20px;
-  min-height: 8em;
-  max-height: 8em;
+  padding: 0 20px 20px 20px;
   line-height: 5em;
+  font-weight: bold;
 }
 .dropped {
-  padding: 20px;
-  background-color: #e5ffc8;
-}
-.controls-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
+  padding: 10px;
+  background-color: #5fa;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
 }
-.controls-container button {
-  font-size: 1.12em;
-  padding: 0.8em 1em;
-  border-radius: 0.2em;
-  border: none;
-  outline: none;
-  color: #009fc7;
-  letter-spacing: 0.06em;
-  cursor: pointer;
-}
-.controls-container p {
-  color: #009fc7;
-  font-size: 2em;
-  margin: 100px;
+.date-box {
+  text-align: center;
+  color: #0007;
+  background-color: #00000017;
 }
 .hide {
   display: none;
+}
+
+#cooper_logo {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  width: 150px;
+}
+
+#coopergames_logo {
+  position: fixed;
+  bottom: 5%;
+  left: 3%;
+  top: auto;
+  width: 250px;
+}
+
+#controls-container {
+  position: fixed;
+  width: 50vw;
+  height: 60vh;
+  top: 45%;
+  left: 50%;
+  background-color: #fff;
+  transform: translate(-50%, -40%);
+  border-radius: 10px;
+}
+
+#controls-container button {
+  background-color: #009fc7;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 30px;
+  font-size: 30px;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: auto 15px;
+  position: absolute;
+  bottom: 10%;
+}
+
+#controls-container .button1 {
+  left: 10%;
+}
+
+#controls-container .button2 {
+  right: 10%;
+}
+
+#controls-container h1 {
+  font-family: "Lato", sans-serif;
+  color: #009fc7;
+  font-size: 45px;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#trophy {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+h1.header {
+  color: #009fc7;
+  font-size: 45px;
+  text-align: center;
+  margin: 25px;
 }

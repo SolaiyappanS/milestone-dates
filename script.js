@@ -1,7 +1,6 @@
 //Initial References
 let draggableObjects;
 let dropPoints;
-const result = document.getElementById("result");
 const controls = document.querySelector(".controls-container");
 const dragContainer = document.querySelector(".draggable-objects");
 const dropContainer = document.querySelector(".drop-points");
@@ -133,7 +132,6 @@ const drop = (e) => {
   }
   //Win
   if (count >= 5) {
-    result.innerText = `You Won!`;
     stopGame();
   }
 };
@@ -167,8 +165,9 @@ const creator = () => {
   randomData = randomData.sort(() => 0.5 - Math.random());
   for (let i of randomData) {
     const countryDiv = document.createElement("div");
-    countryDiv.innerHTML = `<div class='milestones' data-id='${i.date}'>
+    countryDiv.innerHTML = `<div class='milestones'>
     ${i.milestone}
+    <div class="date-box" data-id='${i.date}'>+</div>
     </div>
     `;
     dropContainer.appendChild(countryDiv);
