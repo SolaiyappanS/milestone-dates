@@ -104,10 +104,11 @@ const drop = (e) => {
       //Insert new img element
       currentDrop.insertAdjacentHTML(
         "afterbegin",
-        `<img src= "./img/${currentElement.id}.png">`
+        `<img src= "./img/dates/${currentElement.id}.png">`
       );
       count += 1;
-    }
+      if (count < 5) playSound("matchSound");
+    } else playSound("buzzerSound");
   } else {
     //Access data
     const draggedElementData = e.dataTransfer.getData("text");
@@ -125,14 +126,16 @@ const drop = (e) => {
       //insert new img
       e.target.insertAdjacentHTML(
         "afterbegin",
-        `<img src="./img/${draggedElementData}.png">`
+        `<img src="./img/dates/${draggedElementData}.png">`
       );
       count += 1;
-    }
+      if (count < 5) playSound("matchSound");
+    } else playSound("buzzerSound");
   }
   //Win
   if (count >= 5) {
     stopGame();
+    playSound("winSound");
   }
 };
 
@@ -158,7 +161,7 @@ const creator = () => {
     if (isTouchDevice()) {
       dateDiv.style.position = "absolute";
     }
-    dateDiv.innerHTML = `<img src="./img/${i.date}.png" id="${i.date}">`;
+    dateDiv.innerHTML = `<img src="./img/dates/${i.date}.png" id="${i.date}">`;
     dragContainer.appendChild(dateDiv);
   }
   //Sort the array randomly before creating country divs
@@ -197,3 +200,9 @@ const startGame = async () => {
     element.addEventListener("drop", drop);
   });
 };
+
+function playSound(soundName) {
+  document.getElementById(soundName).currentTime = 0;
+  document.getElementById(soundName).volume = 0.1;
+  document.getElementById(soundName).play();
+}
